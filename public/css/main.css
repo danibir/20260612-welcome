@@ -1,0 +1,137 @@
+/* GLOBALT */
+body {
+    background-color: #050705;
+    color: #8fbf8f;
+    font-family: "Consolas", monospace;
+    margin: 0;
+    padding: 30px;
+}
+
+/* GRID (svak, ikke lysende) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(#0f1a0f33 1px, transparent 1px),
+        linear-gradient(90deg, #0f1a0f33 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* TITLER – ingen glow */
+h1, h2 {
+    color: #7aa87a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* TABELL – matte paneler */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #0b0f0b;
+    border: 1px solid #1f3a1f;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #1f3a1f;
+}
+
+th {
+    background-color: #111611;
+    color: #a4cfa4;
+    font-weight: bold;
+}
+
+/* HOVER – subtil, ikke lysende */
+tbody tr:hover {
+    background-color: #131a13;
+}
+
+/* SEKSJONER – matte paneler */
+section {
+    background-color: #0b100b;
+    padding: 20px;
+    margin-top: 25px;
+    border-left: 4px solid #1f3a1f;
+}
+
+/* LISTE */
+ul li {
+    margin: 8px 0;
+    color: #a4cfa4;
+}
+
+/* Borgman peek */
+img[alt=""] {
+    position: fixed;
+    bottom: -120px; /* hvor mye som er skjult */
+    right: 20px;    /* avstand fra høyre */
+    width: 120px;   /* liten størrelse */
+    opacity: 0.9;   /* litt subtil */
+    transition: bottom 0.4s ease-out;
+    pointer-events: none; /* ikke klikkbar */
+}
+
+/* Når du scroller helt ned */
+body:has(img[alt=""]:hover),
+html:has(img[alt=""]:hover) {
+    /* ingen effekt her, men nødvendig for kompatibilitet */
+}
+
+/* Når du er i bunnen av siden */
+@media (hover: none) {
+    /* mobil trenger ikke hover */
+}
+
+html:root {
+    scroll-behavior: smooth;
+}
+
+/* Avslør mer av bildet når du er i bunnen */
+@supports(selector(:has(*))) {
+    body:has(footer) {
+        /* ikke nødvendig, men placeholder */
+    }
+}
+
+.borg-container {
+    position: fixed;
+    bottom: -120px; /* skjult */
+    left: 0;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-around; /* sprer dem jevnt */
+    pointer-events: none;
+    transition: bottom 0.4s ease-out;
+}
+
+.borg-container img {
+    width: 80px; /* liten størrelse */
+    position: absolute;
+    opacity: 1;
+    user-select: none;
+    filter: sepia(1) hue-rotate(80deg) saturate(1);
+}
+    
+/* Når du scroller helt ned */
+body.scrolled-to-bottom .borg-container {
+    bottom: 0; /* de titter opp */
+}
+
+.borgman-big {
+    position: fixed;
+    bottom: -500px; /* starter langt under skjermen */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px; /* gigantisk */
+    opacity: 0.95;
+    filter: grayscale(1) sepia(1) hue-rotate(80deg) saturate(4) brightness(0.8);
+    transition: bottom 3s ease-out;
+    pointer-events: none;
+}
